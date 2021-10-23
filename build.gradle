@@ -15,9 +15,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = '1.0.9.10'
 group = 'team.creative.littleframes' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'littleframes'
+archivesBaseName = 'littleframes-tortilla'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
