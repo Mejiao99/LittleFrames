@@ -68,7 +68,7 @@ public class FrameVideoDisplay extends FrameDisplay {
 
             @Override
             public BufferFormat getBufferFormat(int sourceWidth, int sourceHeight) {
-                synchronized (this) {
+                synchronized (FrameVideoDisplay.this) {
                     FrameVideoDisplay.this.width = sourceWidth;
                     FrameVideoDisplay.this.height = sourceHeight;
                     FrameVideoDisplay.this.first = true;
