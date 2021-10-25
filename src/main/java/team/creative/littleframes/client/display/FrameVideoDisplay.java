@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.opengl.GL11;
 import team.creative.littleframes.client.texture.TextureCache;
-
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.component.CallbackMediaPlayerComponent;
@@ -14,7 +13,6 @@ import uk.co.caprica.vlcj.player.embedded.videosurface.callback.BufferFormatCall
 import uk.co.caprica.vlcj.player.embedded.videosurface.callback.RenderCallback;
 
 import java.nio.ByteBuffer;
-import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -45,19 +43,20 @@ public class FrameVideoDisplay extends FrameDisplay {
     public int height = 1;
     public CallbackMediaPlayerComponent player;
     public ByteBuffer buffer;
-    public int texture;
+    private int texture;
     private boolean stream = false;
     private float lastSetVolume;
     private AtomicBoolean needsUpdate = new AtomicBoolean(false);
     private boolean first = true;
+    private static final MediaPlayerFactory medialPlayerFactory = new MediaPlayerFactory("--quiet");
+
 
     public FrameVideoDisplay(String url, float volume, boolean loop) {
         super();
 
 
         texture = GlStateManager.generateTexture();
-        player = new CallbackMediaPlayerComponent(new MediaPlayerFactory("--quiet"), null, null, false, new RenderCallback() {
-
+        player = new CallbackMediaPlayerComponent(medialPlayerFactory, null, null, false, new RenderCallback() {
             @Override
             public void display(MediaPlayer mediaPlayer, ByteBuffer[] nativeBuffers, BufferFormat bufferFormat) {
                 synchronized (this) {
@@ -159,6 +158,8 @@ public class FrameVideoDisplay extends FrameDisplay {
         }
         player.release();
         player = null;
+        GlStateManager.deleteTexture(texture);
+        texture = 0;
     }
 
     @Override

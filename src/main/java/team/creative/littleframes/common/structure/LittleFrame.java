@@ -192,7 +192,7 @@ public class LittleFrame extends LittleStructure {
         if (display == null)
             return;
 
-        try{
+        try {
             display.prepare(getURL(), volume * Minecraft.getMinecraft().gameSettings.getSoundLevel(SoundCategory.MASTER), playing, loop, tick);
         } catch (final Error e) {
             e.printStackTrace();
