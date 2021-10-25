@@ -50,10 +50,11 @@ public class LittleFramePacket extends CreativeCorePacket {
                 if (frame.display == null) {
                     return;
                 }
-                if (playing)
+                if (playing) {
                     frame.display.resume(frame.getURL(), frame.volume, frame.playing, frame.loop, frame.tick);
-
-                else frame.display.pause(frame.getURL(), frame.volume, frame.playing, frame.loop, frame.tick);
+                } else {
+                    frame.display.pause(frame.getURL(), frame.volume, frame.playing, frame.loop, frame.tick);
+                }
             }
         } catch (LittleActionException e) {
         }

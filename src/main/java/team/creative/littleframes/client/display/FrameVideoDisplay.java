@@ -53,13 +53,13 @@ public class FrameVideoDisplay extends FrameDisplay {
 
     public FrameVideoDisplay(String url, float volume, boolean loop) {
         super();
-
+        System.err.println("Constructor XL-0");
 
         texture = GlStateManager.generateTexture();
         player = new CallbackMediaPlayerComponent(medialPlayerFactory, null, null, false, new RenderCallback() {
             @Override
             public void display(MediaPlayer mediaPlayer, ByteBuffer[] nativeBuffers, BufferFormat bufferFormat) {
-                synchronized (this) {
+                synchronized (FrameVideoDisplay.this) {
                     buffer = nativeBuffers[0];
                     needsUpdate.set(true);
                 }
@@ -103,6 +103,7 @@ public class FrameVideoDisplay extends FrameDisplay {
                     GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, width, height, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
                     GlStateManager.popMatrix();
                     first = false;
+                    System.err.println("Prepare first = false XL-0");
                 } else {
                     GlStateManager.pushMatrix();
                     GlStateManager.bindTexture(texture);
@@ -153,13 +154,17 @@ public class FrameVideoDisplay extends FrameDisplay {
 
     @Override
     public void release() {
+
         if (player == null) {
             return;
         }
         player.release();
         player = null;
+
         GlStateManager.deleteTexture(texture);
+        System.err.println("Release XL-0");
         texture = 0;
+
     }
 
     @Override
