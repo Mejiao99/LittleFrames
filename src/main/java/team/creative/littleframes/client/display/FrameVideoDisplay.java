@@ -153,6 +153,7 @@ public class FrameVideoDisplay extends FrameDisplay {
             @Override
             public void run() {
                 player.release();
+                GlStateManager.deleteTexture(texture);
                 synchronized (toBeRun) {
                     toBeRun.remove(this);
                 }
